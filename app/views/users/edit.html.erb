@@ -1,0 +1,33 @@
+<!--Edit user info-->
+
+<h2>User info</h2>
+
+<% if @user.errors.any? %>
+  <div class="error" style="color: red;">
+    <h4>error: </h4>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= form_with model:@user, local:true do |f| %>
+  <div class="field">
+    <label>Name</label>
+    <%= f.text_field :name, autofocus:true, id:"inputName" %>
+  </div>
+  <div class="field">
+    <label>Image</label>
+    <%= f.attachment_field :profile_image %>
+  </div>
+  <div class="field">
+    <label>Introduction</label>
+    <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction" %>
+  </div>
+  <div class="action">
+    <%= f.submit "Update User", class:"btn btn-default" %>
+  </div>
+<% end %>

@@ -1,0 +1,58 @@
+
+<!--Error Messages-->
+<% if book.errors.any? %>
+  <div class="error" style="color: red;">
+    <h4>error: </h4>
+    <ul>
+      <% book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="col-xs-3">
+
+  <!--User info-->
+  <h2>User info</h2>
+
+  <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "profile_image", fallback: "no_image.jpg" %>
+  <table class="table">
+    <tbody>
+      <tr></tr>
+      <tr>
+        <th>Name</th>
+        <th><%= user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= user.introduction %></th>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <%= link_to '', edit_user_path(current_user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+  </div>
+
+  <!--New book-->
+  <h2>New book</h2>
+  <%= form_with model:@book, local:true do |f| %>
+
+    <div class="field row">
+      <%= f.label :title %><br />
+      <%= f.text_field :title, autofocus: true, class: "col-xs-12" %><br />
+    </div>
+
+    <div class="field row">
+      <label>Opinion</label><br />
+      <%= f.text_area :body, autofocus: true, class: "col-xs-12" %><br />
+    </div>
+
+    <div class="actions row">
+      <%= f.submit "Create Book", class:"col-xs-12 btn btn-primary" %>
+    </div>
+
+  <% end %>
+
+</div>
